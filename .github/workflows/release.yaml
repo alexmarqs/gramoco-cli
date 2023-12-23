@@ -1,0 +1,111 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build-and-package:
+    name: Build and Package
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+        - os: windows-latest
+          platform: win
+          arch: x64
+        - os: macos-latest
+          platform: macos
+          arch: x64
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Build
+        run: yarn build
+
+      - name: Package for Release
+        run: npx pkg . --targets node16-${{ matrix.platform }}-${{ matrix.arch }} --output bin/gramoco-${{ matrix.platform }}-${{ matrix.arch }}
+      
+      - name: Zip the build (macOS)
+        if: startsWith(matrix.os, 'macos')
+        run: |
+         cp ./gramoco.config.example.json ./gramoco.config.json
+         mv ./gramoco.config.json ./bin/gramoco.config.json
+         cd bin
+         zip -r ../gramoco-${{ matrix.platform }}-${{ matrix.arch }}.zip gramoco-${{ matrix.platform }}-${{ matrix.arch }} ./gramoco.config.json
+        working-directory: .
+
+      - name: Zip the build (Windows)
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          Copy-Item -Path gramoco.config.example.json -Destination gramoco.config.json
+          Compress-Archive -Path bin/gramoco-${{ matrix.platform }}-${{ matrix.arch }}.exe, gramoco.config.json -DestinationPath gramoco-${{ matrix.platform }}-${{ matrix.arch }}.zip
+        shell: pwsh
+        working-directory: .
+
+      - name: Upload Zipped Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: gramoco-${{ matrix.platform }}-${{ matrix.arch }}.zip
+          path: gramoco-${{ matrix.platform }}-${{ matrix.arch }}.zip
+
+  create-release:
+    name: Create Release
+    needs: build-and-package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: .
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
+          draft: true
+          prerelease: false
+
+      # Repeat this step for each artifact you want to upload
+      - name: Upload Release Asset (Windows)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./gramoco-win-x64.zip/gramoco-win-x64.zip
+          asset_name: gramoco-win-x64.zip
+          asset_content_type: application/zip
+  
+
+      - name: Upload Release Asset (macOS x64)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./gramoco-macos-x64.zip/gramoco-macos-x64.zip
+          asset_name: gramoco-macos-x64.zip
+          asset_content_type: application/zip

@@ -1,0 +1,36 @@
+# Gramoco CLI 📸
+
+<div align="center">
+  <img src="./.github/assets/logo_cli_app.png" width="200" height="200">
+  <p>Easy interactions with the Instagram Graph API. For Business and Creator Accounts.</p>
+  <a href="https://github.com/alexmarqs/gramoco-cli-app/actions/workflows/ci.yaml" target="_blank"><img height=20 src="https://github.com/alexmarqs/gramoco-cli-app/actions/workflows/ci.yaml/badge.svg" /></a>
+    <a href="https://github.com/alexmarqs/gramoco-cli-app/actions/workflows/release.yaml" target="_blank"><img height=20 src="https://github.com/alexmarqs/gramoco-cli-app/actions/workflows/release.yaml/badge.svg" /></a>
+  <a href="https://opensource.org/licenses/MIT" target="_blank"><img height=20 src="https://img.shields.io/badge/License-MIT-yellow.svg" /></a>
+
+</div>
+
+## Tech stack 🤓
+
+- [Node.js](https://nodejs.org/en/) For running JavaScript code
+- [TypeScript](https://www.typescriptlang.org/) For type checking
+- [ofetch](https://www.npmjs.com/package/ofetch) For making HTTP requests
+- [Tsup](https://tsup.egoist.dev) For bundling
+- [Tsx](https://www.npmjs.com/package/tsx) To run TypeScript files
+- [Pkg](https://github.com/vercel/pkg) Package your Node.js project into an executable
+- [Inquirer.js](https://www.npmjs.com/package/inquirer) For interactive command line user interfaces
+- [Nanospinner](https://www.npmjs.com/package/nanospinner) For loading spinners
+- [Biome](https://biomejs.dev) For linting and formatting
+
+## Features 🚀
+- [x] Extract Instagram posts summary from your account to a Excel file
+- [x] Extract Instagram comments from a post via Media ID to a Excel file (the Media ID can be found in the post information retrieved by the previous action)
+- Do you have any request? [**Please open an issue!**](https://github.com/alexmarqs/gramoco-cli-app/issues)
+
+## Download 📥
+
+You can download the latest version in the [releases page](https://github.com/alexmarqs/gramoco-cli-app/releases) for your operating system. In alternative, you can clone this repository and build the project yourself and then install it globally (**advanced/developer users**).
+
+## How to use / Instructions 📖
+
+In the downloaded zip folder you will find the executable file and a config file `gramoco.config.json`. In the config file you will need to fill in the following properties: ```INSTAGRAM_ACCESS_TOKEN``` and ```INSTAGRAM_ACCOUNT_ID```. You can find the instructions to get these values in the [SETUP.md](./SETUP.md) file.
+
