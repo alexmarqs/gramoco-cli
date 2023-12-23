@@ -70,7 +70,7 @@ export const extractCommentsToExcelUseCase: ExtractCommentsToExcelUseCase =
 		createCustomHeaderRow(
 			worksheet,
 			"Powered by Gramoco",
-			"https://github.com/alexmarqs/gramoco-cli-app/",
+			"https://github.com/alexmarqs/gramoco-cli",
 			"Open source code",
 		);
 

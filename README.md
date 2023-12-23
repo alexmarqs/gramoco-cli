@@ -3,8 +3,8 @@
 <div align="center">
   <img src="./.github/assets/logo_cli_app.png" width="200" height="200">
   <p>Easy interactions with the Instagram Graph API. For Business and Creator Accounts.</p>
-  <a href="https://github.com/alexmarqs/gramoco-cli-app/actions/workflows/ci.yaml" target="_blank"><img height=20 src="https://github.com/alexmarqs/gramoco-cli-app/actions/workflows/ci.yaml/badge.svg" /></a>
-    <a href="https://github.com/alexmarqs/gramoco-cli-app/actions/workflows/release.yaml" target="_blank"><img height=20 src="https://github.com/alexmarqs/gramoco-cli-app/actions/workflows/release.yaml/badge.svg" /></a>
+  <a href="https://github.com/alexmarqs/gramoco-cli/actions/workflows/ci.yaml" target="_blank"><img height=20 src="https://github.com/alexmarqs/gramoco-cli/actions/workflows/ci.yaml/badge.svg" /></a>
+    <a href="https://github.com/alexmarqs/gramoco-cli/actions/workflows/release.yaml" target="_blank"><img height=20 src="https://github.com/alexmarqs/gramoco-cli/actions/workflows/release.yaml/badge.svg" /></a>
   <a href="https://opensource.org/licenses/MIT" target="_blank"><img height=20 src="https://img.shields.io/badge/License-MIT-yellow.svg" /></a>
 
 </div>
