@@ -5,5 +5,6 @@ export default defineConfig({
 	test: {
 		dir: "tests",
 		passWithNoTests: true,
+		silent: true,
 	},
 });
