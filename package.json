@@ -1,6 +1,6 @@
 {
 	"name": "gramoco-cli",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"private": true,
 	"description": "Gramoco CLI",
 	"keywords": ["cli", "gramoco"],
@@ -23,7 +23,8 @@
 		"test": "echo \"No tests specified\"",
 		"test:e2e": "vitest run",
 		"release:tag": "git tag -a v$npm_package_version -m \"v$npm_package_version\"",
-		"release:push": "git push origin v$npm_package_version"
+		"release:push": "git push origin v$npm_package_version",
+		"release:bump": "npm version patch --no-git-tag-version"
 	},
 	"pkg": {
 		"scripts": ["dist/**/*.js"],
