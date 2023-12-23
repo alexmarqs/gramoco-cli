@@ -24,11 +24,11 @@
 ## Features 🚀
 - [x] Extract Instagram posts summary from your account to a Excel file
 - [x] Extract Instagram comments from a post via Media ID to a Excel file (the Media ID can be found in the post information retrieved by the previous action)
-- Do you have any request? [**Please open an issue!**](https://github.com/alexmarqs/gramoco-cli-app/issues)
+- Do you have any request? [**Please open an issue!**](https://github.com/alexmarqs/gramoco-cli/issues)
 
 ## Download 📥
 
-You can download the latest version in the [releases page](https://github.com/alexmarqs/gramoco-cli-app/releases) for your operating system. In alternative, you can clone this repository and build the project yourself and then install it globally (**advanced/developer users**).
+You can download the latest version in the [releases page](https://github.com/alexmarqs/gramoco-cli/releases) for your operating system. In alternative, you can clone this repository and build the project yourself and then install it globally (**advanced/developer users**).
 
 ## How to use / Instructions 📖
 

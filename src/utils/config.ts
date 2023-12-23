@@ -21,7 +21,9 @@ const initConfig = () => {
 		!parsedConfig.INSTAGRAM_ACCESS_TOKEN ||
 		!parsedConfig.INSTAGRAM_BUSINESS_ACCOUNT_ID
 	) {
-		throw new Error("Missing config values. Please check your config file.");
+		throw new Error(
+			"Missing config values. Please check your config file according to the docs: https://github.com/alexmarqs/gramoco-cli.",
+		);
 	}
 
 	config = parsedConfig;
