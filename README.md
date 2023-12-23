@@ -34,3 +34,6 @@ You can download the latest version in the [releases page](https://github.com/al
 
 In the downloaded zip folder you will find the executable file and a config file `gramoco.config.json`. In the config file you will need to fill in the following properties: ```INSTAGRAM_ACCESS_TOKEN``` and ```INSTAGRAM_ACCOUNT_ID```. You can find the instructions to get these values in the [SETUP.md](./SETUP.md) file.
 
+## TODO 📝
+
+- [ ] Right now we are keeping the data in memory and then writing it to a file. This is not a good practice for large amounts of data (which may be not the case for most users). We should write the data to a file as soon as we get it from the API using streams. Add some tests to check the performance of the app.
