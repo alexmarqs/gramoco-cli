@@ -9,6 +9,10 @@
 
 </div>
 
+## Purpose 🎯
+
+A friend of mine asked me to help him extract some data from his Instagram account. His main goal was to extract the comments from a post to a Excel file. I thought it would be a good idea to create a CLI app that could help him and other people to do this kind of tasks. This is the result.
+
 ## Tech stack 🤓
 
 - [Node.js](https://nodejs.org/en/) For running JavaScript code
