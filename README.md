@@ -12,6 +12,7 @@
 ## Tech stack 🤓
 
 - [Node.js](https://nodejs.org/en/) For running JavaScript code
+- [Vitest](https://vitest.dev/) For testing
 - [TypeScript](https://www.typescriptlang.org/) For type checking
 - [ofetch](https://www.npmjs.com/package/ofetch) For making HTTP requests
 - [Tsup](https://tsup.egoist.dev) For bundling
