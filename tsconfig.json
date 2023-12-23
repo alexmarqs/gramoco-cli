@@ -8,6 +8,6 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
   },
-	"exclude": ["node_modules", "dist", "bin"],
+	"exclude": ["node_modules", "dist", "bin", "**/*.spec.ts", "**/*.test.ts"],
 	"include": ["src/**/*.ts"]
 }
