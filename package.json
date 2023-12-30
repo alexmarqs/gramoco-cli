@@ -20,8 +20,8 @@
 		"type-check": "tsc --noEmit",
 		"format": "npx @biomejs/biome format ./src/**/*.ts --write",
 		"lint": "npx @biomejs/biome lint ./src/**/*.ts",
-		"test": "echo \"No tests specified\"",
-		"test:e2e": "vitest run",
+		"test": "vitest run",
+		"test:e2e": "vitest run --config ./vitest.e2e.config.mts",
 		"release:tag": "git tag -a v$npm_package_version -m \"v$npm_package_version\"",
 		"release:push": "git push origin v$npm_package_version",
 		"release:bump": "npm version patch --no-git-tag-version"
@@ -31,7 +31,7 @@
 		"outputPath": "bin"
 	},
 	"engines": {
-		"node": ">=18.0.0"
+		"node": ">=16.0.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.3.3",
