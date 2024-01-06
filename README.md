@@ -13,6 +13,10 @@
 
 A friend of mine asked me to help him extract some data from his Instagram account. His main goal was to extract the comments from a post to a Excel file. I thought it would be a good idea to create a CLI app that could help him and other people to do this kind of tasks. This is the result.
 
+## Donations 💰
+
+If you like this project and you want to support it, you can do it through [PayPal](https://www.paypal.com/donate/?hosted_button_id=G3GPPS9EB35W4)!
+
 ## Tech stack 🤓
 
 - [Node.js](https://nodejs.org/en/) For running JavaScript code
