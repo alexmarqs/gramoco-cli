@@ -38,7 +38,7 @@ These instructions will guide you through setting up your Instagram Business/Cre
   2. Set up the Instagram Graph API settings as required.
 
 ## Step 5: Add Your Instagram Business/Creator Account as a Test User 
-(Ignore this step if you are using a Facebook Developer Account that is linked to the Instagram Business/Creator account you want to use with this tool)
+(**Ignore this step if you are using a Facebook Developer Account that is linked to the Instagram Business/Creator account you want to use with this tool**)
 
 - Add your account as a test user for app development purposes:
   1. In the 'Roles' section of your Facebook App settings, add your Instagram Business account as a test user.
