@@ -11,7 +11,7 @@
 
 ## Purpose 🎯
 
-A friend of mine asked me to help him extract some data from his Instagram account. His main goal was to extract the comments from a post to a Excel file. I thought it would be a good idea to create a CLI app that could help him and other people to do this kind of tasks. This is the result.
+A friend of mine needed help extracting data from his Instagram account. He mainly wanted to get the comments from a post into an Excel file. I thought, why not make a CLI app for this? It could be useful for him and others needing to do the same thing. So, here's what I ended up creating.
 
 ## Donations 💰
 
