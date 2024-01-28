@@ -1,12 +1,12 @@
 import { InstagramService } from "../adapters/instagram/instagram-service";
 
-import { getConfig } from "../utils/config";
-import { ExcelService } from "../adapters/excel/excel-service";
-import { MediaComments } from "../types";
 import {
 	createCustomHeaderRow,
 	setHyperlinkCellValue,
 } from "../adapters/excel/excel-layout-utils";
+import { ExcelService } from "../adapters/excel/excel-service";
+import { MediaComments } from "../types";
+import { getConfig } from "../utils/config";
 
 export type ExtractCommentsToExcelUseCaseRequest = {
 	mediaId: string;
@@ -26,7 +26,7 @@ export type ExtractCommentsToExcelUseCase = (
 export const extractCommentsToExcelUseCase: ExtractCommentsToExcelUseCase =
 	async (request, instagramService, excelService) => {
 		const { mediaId } = request;
-		const accessToken = getConfig("INSTAGRAM_ACCESS_TOKEN");
+		const { INSTAGRAM_ACCESS_TOKEN: accessToken } = getConfig();
 
 		// Fetch shortcode from mediaId
 		const { shortcode } = await instagramService.getShortcodeFromMediaId(

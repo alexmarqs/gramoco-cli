@@ -2,20 +2,22 @@
 import { input, select } from "@inquirer/prompts";
 
 import { createSpinner } from "nanospinner";
+import { z } from "zod";
 import packageJson from "../package.json";
-import { ACTIONS } from "./types";
-import { initConfig } from "./utils/config";
-import { instagramService } from "./adapters/instagram/instagram-service-adapter";
-import { extractCommentsToExcelUseCase } from "./use-cases/extractCommentsToExcel";
 import { excelService } from "./adapters/excel/excel-service-adapter";
+import { instagramService } from "./adapters/instagram/instagram-service-adapter";
+import { ACTIONS } from "./types";
+import { extractCommentsToExcelUseCase } from "./use-cases/extractCommentsToExcel";
 import { extractPostsToExcelUseCase } from "./use-cases/extractPostsToExcel";
+import { initConfig } from "./utils/config";
 
 const cliApp = async () => {
 	console.clear();
 	const version = packageJson.version;
 	console.info(`Gramoco CLI ${version ? `v${version}` : ""}`);
 
-	initConfig();
+	// Initialize configuration
+	await initConfig();
 
 	const selectedAction = await select({
 		message: "What do you want to do?",
@@ -116,8 +118,16 @@ const cliApp = async () => {
 	}
 };
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-cliApp().catch((error: any) => {
-	console.error(`*Error* ${error?.message ? error?.message : "unknown"}`);
+cliApp().catch((error) => {
+	if (error instanceof z.ZodError) {
+		console.error(
+			`*Invalid configuration* ${error.errors
+				.map((e) => `${e.path.join(".")}: ${e.message}`)
+				.join(" ; ")}`,
+		);
+	} else {
+		console.error(`*Error* ${error?.message ? error?.message : "unknown"}`);
+	}
+
 	process.exit();
 });

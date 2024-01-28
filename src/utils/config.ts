@@ -1,40 +1,38 @@
-import { existsSync, readFileSync } from "fs";
-import { Config } from "../types";
 import path from "path";
+import { z } from "zod";
+import { loadConfig } from "zod-config";
+import { envAdapter } from "zod-config/env-adapter";
+import { jsonAdapter } from "zod-config/json-adapter";
 
-let config: Config;
+const configSchema = z.object({
+	INSTAGRAM_ACCESS_TOKEN: z.string(),
+	INSTAGRAM_BUSINESS_ACCOUNT_ID: z.string(),
+});
 
-const initConfig = () => {
+let config: z.infer<typeof configSchema>;
+
+const initConfig = async () => {
 	const configPath = path.join(process.cwd(), "gramoco.config.json");
 
-	if (!existsSync(configPath)) {
-		throw new Error(
-			"No config file found. Please create one according to the docs.",
-		);
-	}
-
-	const configJsonFile = readFileSync(configPath, "utf-8");
-
-	const parsedConfig: Config = JSON.parse(configJsonFile);
-
-	if (
-		!parsedConfig.INSTAGRAM_ACCESS_TOKEN ||
-		!parsedConfig.INSTAGRAM_BUSINESS_ACCOUNT_ID
-	) {
-		throw new Error(
-			"Missing config values. Please check your config file according to the docs: https://github.com/alexmarqs/gramoco-cli.",
-		);
-	}
+	const parsedConfig = await loadConfig({
+		schema: configSchema,
+		adapters: [
+			jsonAdapter({
+				path: configPath,
+			}),
+			envAdapter(),
+		],
+	});
 
 	config = parsedConfig;
 };
 
-const getConfig = (key: keyof Config) => {
+const getConfig = () => {
 	if (!config) {
-		throw new Error("Config not initialized or invalid");
+		throw new Error("Configuration not initialized");
 	}
 
-	return config[key];
+	return config;
 };
 
-export { initConfig, getConfig };
+export { getConfig, initConfig };

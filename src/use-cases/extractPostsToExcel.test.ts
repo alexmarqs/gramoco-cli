@@ -1,94 +1,113 @@
-import { describe, it, expect, vi } from "vitest";
+import { Worksheet } from "exceljs";
+import { describe, expect, it, vi } from "vitest";
+import { ExcelService } from "../adapters/excel/excel-service";
+import { InstagramService } from "../adapters/instagram/instagram-service";
 import { extractPostsToExcelUseCase } from "./extractPostsToExcel";
-import { instagramService } from "../adapters/instagram/instagram-service-adapter";
-import { excelService } from "../adapters/excel/excel-service-adapter";
-import { Config } from "../types";
-import { afterEach } from "node:test";
+
+const mockedInstagramService = vi.mocked<InstagramService>({
+	getPostsFromBusinessAccount: vi.fn(),
+	getShortcodeFromMediaId: vi.fn(),
+	getCommentsFromMedia: vi.fn(),
+});
+
+const mockedExcelService = vi.mocked<ExcelService>({
+	createWorkbook: vi.fn(),
+	createWorksheet: vi.fn(),
+	addColumnsToWorksheet: vi.fn(),
+	saveWorkbookToFile: vi.fn(),
+});
 
 vi.mock("../utils/config", () => ({
-	getConfig: vi.fn((key: keyof Config) => {
-		if (key === "INSTAGRAM_ACCESS_TOKEN") {
-			return "mocked_access_token";
-		}
-		if (key === "INSTAGRAM_BUSINESS_ACCOUNT_ID") {
-			return "mocked_business_account_id";
-		}
-		return null;
+	getConfig: vi.fn().mockImplementation(() => {
+		return {
+			INSTAGRAM_ACCESS_TOKEN: "mocked_access_token",
+			INSTAGRAM_BUSINESS_ACCOUNT_ID: "mocked_business_account_id",
+		};
 	}),
 }));
 
-vi.mock("../adapters/instagram/instagram-service");
-vi.mock("../adapters/excel/excel-service");
-
 describe("extractPostsToExcelUseCase", () => {
-	afterEach(() => {
-		vi.restoreAllMocks();
-	});
-
 	it("should extract posts and create an Excel file", async () => {
 		mockInstagramService();
 		mockExcelService();
 		const response = await extractPostsToExcelUseCase(
 			{ numberOfPosts: 2 },
-			instagramService,
-			excelService,
+			mockedInstagramService,
+			mockedExcelService,
 		);
 
 		expect(response.filePath).toBe("path/to/file.xlsx");
 		expect(response.numberOfPosts).toBe(2);
-		expect(instagramService.getPostsFromBusinessAccount).toHaveBeenCalled();
-		expect(excelService.createWorkbook).toHaveBeenCalled();
-		expect(excelService.createWorksheet).toHaveBeenCalled();
+		expect(
+			mockedInstagramService.getPostsFromBusinessAccount,
+		).toHaveBeenCalled();
+		expect(mockedExcelService.createWorkbook).toHaveBeenCalled();
+		expect(mockedExcelService.createWorksheet).toHaveBeenCalled();
 	});
 
 	it("should throw an error if no posts are found", async () => {
-		instagramService.getPostsFromBusinessAccount = vi.fn().mockResolvedValue({
+		mockedInstagramService.getPostsFromBusinessAccount.mockResolvedValue({
 			data: [],
 		});
 
 		await expect(
 			extractPostsToExcelUseCase(
 				{ numberOfPosts: 2 },
-				instagramService,
-				excelService,
+				mockedInstagramService,
+				mockedExcelService,
 			),
 		).rejects.toThrow("No posts found");
 	});
 });
 
 const mockInstagramService = () => {
-	instagramService.getPostsFromBusinessAccount = vi.fn().mockResolvedValue({
-		data: [{ id: "1" }, { id: "2" }],
+	mockedInstagramService.getPostsFromBusinessAccount.mockResolvedValue({
+		data: [
+			{
+				id: "mocked_post_id",
+				permalink: "mocked_permalink",
+				caption: "mocked_caption",
+				timestamp: 0,
+				like_count: 0,
+				comments_count: 0,
+			},
+			{
+				id: "mocked_post_id_2",
+				permalink: "mocked_permalink_2",
+				caption: "mocked_caption_2",
+				timestamp: 0,
+				like_count: 0,
+				comments_count: 0,
+			},
+		],
 	});
 };
 
 const mockExcelService = () => {
-	excelService.createWorkbook = vi.fn();
-	excelService.createWorksheet = vi
-		.fn()
-		.mockImplementation(createMockWorksheet);
-	excelService.addColumnsToWorksheet = vi.fn();
-	excelService.saveWorkbookToFile = vi
-		.fn()
-		.mockResolvedValue("path/to/file.xlsx");
+	mockedExcelService.createWorksheet.mockImplementation(createMockWorksheet);
+	mockedExcelService.saveWorkbookToFile.mockResolvedValue("path/to/file.xlsx");
 };
 
-function createMockWorksheet() {
+const createMockWorksheet = () => {
 	return {
 		addRow: vi.fn().mockReturnValue({
-			getCell: vi.fn().mockReturnValue({
-				value: "mocked_value",
-			}),
-		}),
-		getRow: vi.fn().mockReturnValue({
 			eachCell: vi.fn(),
+			getCell: vi.fn().mockReturnValue({
+				value: {},
+			}),
 		}),
 		insertRow: vi.fn().mockReturnValue({
 			getCell: vi.fn().mockReturnValue({
-				value: "mocked_value",
+				value: {},
 			}),
 		}),
+		getCell: vi.fn().mockReturnValue({
+			value: {},
+		}),
 		columns: [],
+		getRow: vi.fn().mockReturnValue({
+			eachCell: vi.fn(),
+		}),
 		mergeCells: vi.fn(),
-	};
-}
+	} as unknown as Worksheet;
+};

@@ -2600,3 +2600,13 @@ zip-stream@^4.1.0:
     archiver-utils "^3.0.4"
     compress-commons "^4.1.2"
     readable-stream "^3.6.0"
+
+zod-config@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/zod-config/-/zod-config-0.0.1.tgz#c175e941984b85d157c31e5716966353b319682e"
+  integrity sha512-61lZWqAF3kJPPwT0u4UDTmKaXLJ2scMp0AhRTeful/sfSydHOAhblh8JLVr1EbYY2JG5jlQbJSIJ89PGnlxKaw==
+
+zod@3.22.4:
+  version "3.22.4"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.22.4.tgz#f31c3a9386f61b1f228af56faa9255e845cf3fff"
+  integrity sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==

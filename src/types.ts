@@ -1,8 +1,3 @@
-export type Config = {
-	INSTAGRAM_ACCESS_TOKEN: string;
-	INSTAGRAM_BUSINESS_ACCOUNT_ID: string;
-};
-
 export const ACTIONS = Object.freeze({
 	EXTRACT_COMMENTS_MEDIA_EXCEL: "comments",
 	EXTRACT_MEDIA_EXCEL: "media",

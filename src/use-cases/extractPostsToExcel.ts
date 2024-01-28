@@ -28,8 +28,10 @@ export const extractPostsToExcelUseCase: ExtractPostsToExcelUseCase = async (
 	excelService,
 ) => {
 	const { numberOfPosts } = request;
-	const accessToken = getConfig("INSTAGRAM_ACCESS_TOKEN");
-	const accountId = getConfig("INSTAGRAM_BUSINESS_ACCOUNT_ID");
+	const {
+		INSTAGRAM_ACCESS_TOKEN: accessToken,
+		INSTAGRAM_BUSINESS_ACCOUNT_ID: accountId,
+	} = getConfig();
 
 	// Fetch posts
 	const posts: MediaPosts[] = [];

@@ -1,21 +1,22 @@
-import { describe, expect, it, vi, afterEach } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
-import { extractCommentsToExcelUseCase } from "./extractCommentsToExcel";
-import { instagramService } from "../adapters/instagram/instagram-service-adapter";
 import { excelService } from "../adapters/excel/excel-service-adapter";
+import { instagramService } from "../adapters/instagram/instagram-service-adapter";
+import { extractCommentsToExcelUseCase } from "./extractCommentsToExcel";
 
 vi.mock("../utils/config", () => ({
-	getConfig: vi.fn().mockReturnValue("mocked_access_token"),
+	getConfig: vi.fn().mockImplementation(() => {
+		return {
+			INSTAGRAM_ACCESS_TOKEN: "mocked_access_token",
+			INSTAGRAM_BUSINESS_ACCOUNT_ID: "mocked_business_account_id",
+		};
+	}),
 }));
 
 vi.mock("../adapters/instagram/instagram-service");
 vi.mock("../adapters/excel/excel-service");
 
 describe("extractCommentsToExcelUseCase", () => {
-	afterEach(() => {
-		vi.resetAllMocks();
-	});
-
 	it("should extract comments and create an Excel file", async () => {
 		mockInstagramService();
 		mockExcelService();
