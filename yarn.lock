@@ -2855,10 +2855,10 @@ zip-stream@^4.1.0:
     compress-commons "^4.1.2"
     readable-stream "^3.6.0"
 
-zod-config@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/zod-config/-/zod-config-0.0.2.tgz#98b56839e7f97ca43d53c68ba6b92775678872cf"
-  integrity sha512-Hx3cf4lkCps65B8g8mD0aHDl3mREYLqG/+ZJT5k0vlOSKsyr9ua7LDlkli3VRgUKi/0C2bptqKepyRB8rSIoPw==
+zod-config@0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/zod-config/-/zod-config-0.0.5.tgz#e406825903acbaa1fb005ee3578dbf726ad660d5"
+  integrity sha512-tW7J4bwVPYD0eYeaDzIjEpv188118H+uCbb+DaBRIGwuZNCSL0WyMmpeOmgMpbsGzrJ9YjtC5XFpyWlj27vd8g==
 
 zod@3.22.4:
   version "3.22.4"

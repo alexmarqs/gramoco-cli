@@ -12,7 +12,7 @@ export const excelService: ExcelService = {
 		return worksheet;
 	},
 	saveWorkbookToFile: async (workbook, fileName) => {
-		const filePath = path.join(process.cwd(), fileName);
+		const filePath = path.join(path.dirname(process.execPath), fileName);
 		await workbook.xlsx.writeFile(filePath);
 		return filePath;
 	},

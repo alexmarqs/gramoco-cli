@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { input, select } from "@inquirer/prompts";
-
+import readline from "node:readline";
 import { createSpinner } from "nanospinner";
 import { z } from "zod";
 import packageJson from "../package.json";
@@ -118,16 +118,30 @@ const cliApp = async () => {
 	}
 };
 
-cliApp().catch((error) => {
-	if (error instanceof z.ZodError) {
-		console.error(
-			`*Invalid configuration* ${error.errors
-				.map((e) => `${e.path.join(".")}: ${e.message}`)
-				.join(" ; ")}`,
-		);
-	} else {
-		console.error(`*Error* ${error?.message ? error?.message : "unknown"}`);
-	}
+cliApp()
+	.catch((error) => {
+		if (error instanceof z.ZodError) {
+			console.error(
+				`\nINVALID CONFIGURATION: ${error.errors
+					.map((e) => `${e.path.join(".")}: ${e.message}`)
+					.join(" ; ")}`,
+			);
+		} else {
+			console.error(`\nERROR: ${error?.message ? error?.message : "unknown"}`);
+		}
+	})
+	.finally(() => {
+		// Prompt user to press any key to exit
+		const rl = readline.createInterface({
+			input: process.stdin,
+			output: process.stdout,
+		});
 
-	process.exit();
-});
+		console.log("\nPress any key to exit...");
+		process.stdin.setRawMode(true);
+		process.stdin.resume();
+		process.stdin.on("data", () => {
+			rl.close();
+			process.exit();
+		});
+	});

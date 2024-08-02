@@ -12,7 +12,11 @@ const configSchema = z.object({
 let config: z.infer<typeof configSchema>;
 
 const initConfig = async () => {
-	const configPath = path.join(process.cwd(), "gramoco.config.json");
+	// current dir where the script is running:
+	const configPath = path.join(
+		path.dirname(process.execPath),
+		"gramoco.config.json",
+	);
 
 	const parsedConfig = await loadConfig({
 		schema: configSchema,
