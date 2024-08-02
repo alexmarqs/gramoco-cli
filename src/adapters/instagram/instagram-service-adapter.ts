@@ -6,7 +6,9 @@ import {
 } from "../../types";
 import { InstagramService } from "./instagram-service";
 
-const PAGE_SIZE = 25;
+const PAGE_SIZE = process.env.GRAMOCO_API_PAGE_SIZE
+	? parseInt(process.env.GRAMOCO_API_PAGE_SIZE)
+	: 500;
 const BASE_API_URL = "https://graph.facebook.com/v18.0";
 const apiFetch = ofetch.create({ baseURL: BASE_API_URL });
 
