@@ -29,6 +29,7 @@ If you like this project and you want to support it, you can do it through [PayP
 - [Inquirer.js](https://www.npmjs.com/package/inquirer) For interactive command line user interfaces
 - [Nanospinner](https://www.npmjs.com/package/nanospinner) For loading spinners
 - [Biome](https://biomejs.dev) For linting and formatting
+- [Zod Config](https://github.com/alexmarqs/zod-config) For loading configuration from several sources using Zod
 
 ## Features 🚀
 - [x] Extract Instagram posts summary from your account to a Excel file
