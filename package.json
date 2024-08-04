@@ -1,6 +1,6 @@
 {
 	"name": "gramoco-cli",
-	"version": "0.0.2",
+	"version": "0.0.3-0",
 	"private": true,
 	"description": "Gramoco CLI",
 	"keywords": [
@@ -27,7 +27,8 @@
 		"test:e2e": "vitest run --config ./vitest.e2e.config.mts",
 		"release:tag": "git tag -a v$npm_package_version -m \"v$npm_package_version\"",
 		"release:push": "git push origin v$npm_package_version",
-		"release:bump": "npm version patch --no-git-tag-version"
+		"release:bump": "npm version patch --no-git-tag-version",
+		"prerelease:bump": "npm version prerelease --no-git-tag-version"
 	},
 	"pkg": {
 		"scripts": [
