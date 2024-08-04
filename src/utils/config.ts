@@ -23,6 +23,7 @@ const initConfig = async () => {
 		adapters: [
 			jsonAdapter({
 				path: configPath,
+				silent: true,
 			}),
 			envAdapter(),
 		],

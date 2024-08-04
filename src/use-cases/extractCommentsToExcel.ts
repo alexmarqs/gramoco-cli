@@ -7,6 +7,7 @@ import {
 import { ExcelService } from "../adapters/excel/excel-service";
 import { MediaComments } from "../types";
 import { getConfig } from "../utils/config";
+import { Worksheet } from "exceljs";
 
 export type ExtractCommentsToExcelUseCaseRequest = {
 	mediaId: string;
@@ -63,6 +64,7 @@ export const extractCommentsToExcelUseCase: ExtractCommentsToExcelUseCase =
 			{ header: "Date", key: "date", width: 20 },
 			{ header: "Likes", key: "likes", width: 10 },
 			{ header: "Comment", key: "comment", width: 40 },
+			{ header: "Parent Comment", key: "parent", width: 20 },
 			{ header: "Source", key: "source", width: 20 },
 		]);
 
@@ -75,33 +77,20 @@ export const extractCommentsToExcelUseCase: ExtractCommentsToExcelUseCase =
 		);
 
 		// Add comments
-		// biome-ignore lint/complexity/noForEach: <explanation>
-		comments.forEach((comment, index) => {
-			const row = worksheet.addRow({
-				seq: index + 1,
-				profile: "",
-				date: new Date(comment.timestamp).toLocaleString(),
-				likes: comment.like_count,
-				comment: comment.text,
-				source: "",
-			});
+		let index = 0;
+		for (const comment of comments) {
+			addRowToWorksheet(worksheet, index, comment, shortcode);
 
-			setHyperlinkCellValue(
-				row,
-				"profile",
-				comment.username,
-				`https://www.instagram.com/${comment.username}`,
-				"Open profile",
-			);
+			if (comment.replies?.data) {
+				for (const reply of comment.replies.data) {
+					const parentIndex = index;
+					index++;
+					addRowToWorksheet(worksheet, index, reply, shortcode, parentIndex);
+				}
+			}
 
-			setHyperlinkCellValue(
-				row,
-				"source",
-				"View comment",
-				`https://www.instagram.com/p/${shortcode}/c/${comment.id}`,
-				"Open comment",
-			);
-		});
+			index++;
+		}
 
 		// Save Excel file
 		const filePath = await excelService.saveWorkbookToFile(
@@ -112,3 +101,37 @@ export const extractCommentsToExcelUseCase: ExtractCommentsToExcelUseCase =
 		// Return response
 		return { numberOfComments: comments.length, filePath: filePath };
 	};
+
+const addRowToWorksheet = (
+	worksheet: Worksheet,
+	index: number,
+	comment: MediaComments,
+	shortcode: string,
+	parent?: number,
+) => {
+	const row = worksheet.addRow({
+		seq: index + 1,
+		profile: "",
+		date: new Date(comment.timestamp).toLocaleString(),
+		likes: comment.like_count,
+		comment: comment.text,
+		parent: parent === undefined ? parent : parent + 1,
+		source: "",
+	});
+
+	setHyperlinkCellValue(
+		row,
+		"profile",
+		comment.username,
+		`https://www.instagram.com/${comment.username}`,
+		"Open profile",
+	);
+
+	setHyperlinkCellValue(
+		row,
+		"source",
+		"View comment",
+		`https://www.instagram.com/p/${shortcode}/c/${comment.id}`,
+		"Open comment",
+	);
+};

@@ -23,7 +23,8 @@ const getCommentsFromMedia = async (
 			method: "GET",
 			query: {
 				access_token: accessToken,
-				fields: "id,username,timestamp,text,like_count",
+				fields:
+					"id,username,timestamp,text,like_count,replies{parent_id,id,username,timestamp,text,like_count}",
 				after: cursorNext || undefined,
 				limit: PAGE_SIZE,
 			},

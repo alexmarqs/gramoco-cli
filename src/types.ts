@@ -30,6 +30,9 @@ export type MediaComments = {
 	timestamp: string;
 	text: string;
 	like_count: number;
+	replies?: {
+		data: MediaComments[];
+	};
 };
 
 export const MediaCommentsFields = Object.keys({} as MediaComments).join(",");

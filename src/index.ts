@@ -138,10 +138,21 @@ cliApp()
 		});
 
 		console.log("\nPress any key to exit...");
-		process.stdin.setRawMode(true);
+
+		if (process.stdin.isTTY && typeof process.stdin.setRawMode === "function") {
+			process.stdin.setRawMode(true);
+		}
+
 		process.stdin.resume();
 		process.stdin.on("data", () => {
+			if (
+				process.stdin.isTTY &&
+				typeof process.stdin.setRawMode === "function"
+			) {
+				process.stdin.setRawMode(false);
+			}
 			rl.close();
+			process.stdin.pause();
 			process.exit();
 		});
 	});
