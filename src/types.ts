@@ -30,6 +30,7 @@ export type MediaComments = {
 	timestamp: string;
 	text: string;
 	like_count: number;
+	parent_id?: string;
 	replies?: {
 		data: MediaComments[];
 	};

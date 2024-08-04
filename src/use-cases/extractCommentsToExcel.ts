@@ -138,7 +138,9 @@ const addRowToWorksheet = (
 		row,
 		"source",
 		"View comment",
-		`https://www.instagram.com/p/${shortcode}/c/${comment.id}`,
+		parent === undefined
+			? `https://www.instagram.com/p/${shortcode}/c/${comment.id}`
+			: `https://www.instagram.com/p/${shortcode}/c/${comment.parent_id}/r/${comment.id}`,
 		"Open comment",
 	);
 };
