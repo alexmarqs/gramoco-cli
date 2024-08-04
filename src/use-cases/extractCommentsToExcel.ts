@@ -98,8 +98,15 @@ export const extractCommentsToExcelUseCase: ExtractCommentsToExcelUseCase =
 			`comments-${shortcode}-${new Date().getTime()}.xlsx`,
 		);
 
+		const totalComments =
+			comments.length +
+			comments.reduce(
+				(acc, comment) => acc + (comment.replies?.data?.length || 0),
+				0,
+			);
+
 		// Return response
-		return { numberOfComments: comments.length, filePath: filePath };
+		return { numberOfComments: totalComments, filePath: filePath };
 	};
 
 const addRowToWorksheet = (
