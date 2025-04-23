@@ -2,7 +2,7 @@
 import { input, select } from "@inquirer/prompts";
 import readline from "node:readline";
 import { createSpinner } from "nanospinner";
-import { z } from "zod";
+import * as z from "@zod/mini";
 import packageJson from "../package.json";
 import { excelService } from "./adapters/excel/excel-service-adapter";
 import { instagramService } from "./adapters/instagram/instagram-service-adapter";
@@ -120,7 +120,7 @@ const cliApp = async () => {
 
 cliApp()
 	.catch((error) => {
-		if (error instanceof z.ZodError) {
+		if (error instanceof z.core.$ZodError) {
 			console.error(
 				`\nINVALID CONFIGURATION: ${error.issues
 					.map((e) => `${e.path.join(".")}: ${e.message}`)

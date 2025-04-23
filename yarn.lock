@@ -747,6 +747,13 @@
   resolved "https://registry.yarnpkg.com/@zod/core/-/core-0.8.1.tgz#8d1c245677a80805d183e8b493dd37f459674416"
   integrity sha512-djj8hPhxIHcG8ptxITaw/Bout5HJZ9NyRbKr95Eilqwt9R0kvITwUQGDU+n+MVdsBIka5KwztmZSLti22F+P0A==
 
+"@zod/mini@4.0.0-beta.20250420T053007":
+  version "4.0.0-beta.20250420T053007"
+  resolved "https://registry.yarnpkg.com/@zod/mini/-/mini-4.0.0-beta.20250420T053007.tgz#62685277baf4c886ebaf9f29939e71d0a1fbd451"
+  integrity sha512-PnQwkzlUbUj6A2GKbqhskH/v58m2WfmP+dbXevzzMdvVA7H/KNao37YWhHOTjBzf+xykCXNoLwfwnPMIsU0hOA==
+  dependencies:
+    "@zod/core" "0.8.1"
+
 acorn-walk@^8.3.0:
   version "8.3.1"
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-8.3.1.tgz#2f10f5b69329d90ae18c58bf1fa8fccd8b959a43"
@@ -2864,10 +2871,3 @@ zod-config@1.0.0-rc.0:
   version "1.0.0-rc.0"
   resolved "https://registry.yarnpkg.com/zod-config/-/zod-config-1.0.0-rc.0.tgz#beb9ef25ec4c744e312dfac4ffe4a52f81c667fc"
   integrity sha512-UTADfaywaeZeKTrCtjhRTNTwCgNLV/SzDr3Dxxfscq1jHq9FtVgrH7iSPxFZk8vlpssFrGr1eCAS+A+s3cbnYw==
-
-zod@4.0.0-beta.20250420T053007:
-  version "4.0.0-beta.20250420T053007"
-  resolved "https://registry.yarnpkg.com/zod/-/zod-4.0.0-beta.20250420T053007.tgz#ab64663e7835d5db5d61d708f4cb5c5ab97623db"
-  integrity sha512-5pp8Q0PNDaNcUptGiBE9akyioJh3RJpagIxrLtAVMR9IxwcSZiOsJD/1/98CyhItdTlI2H91MfhhLzRlU+fifA==
-  dependencies:
-    "@zod/core" "0.8.1"
