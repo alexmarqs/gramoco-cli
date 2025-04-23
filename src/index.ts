@@ -122,7 +122,7 @@ cliApp()
 	.catch((error) => {
 		if (error instanceof z.ZodError) {
 			console.error(
-				`\nINVALID CONFIGURATION: ${error.errors
+				`\nINVALID CONFIGURATION: ${error.issues
 					.map((e) => `${e.path.join(".")}: ${e.message}`)
 					.join(" ; ")}`,
 			);
