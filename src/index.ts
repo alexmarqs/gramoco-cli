@@ -2,7 +2,7 @@
 import { input, select } from "@inquirer/prompts";
 import readline from "node:readline";
 import { createSpinner } from "nanospinner";
-import * as z from "@zod/mini";
+import { z } from "zod/v4-mini";
 import packageJson from "../package.json";
 import { excelService } from "./adapters/excel/excel-service-adapter";
 import { instagramService } from "./adapters/instagram/instagram-service-adapter";
