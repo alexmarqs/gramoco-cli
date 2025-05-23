@@ -1,5 +1,5 @@
 import path from "path";
-import * as z from "@zod/mini";
+import { z } from "zod/v4-mini";
 import { loadConfig } from "zod-config";
 import { envAdapter } from "zod-config/env-adapter";
 import { jsonAdapter } from "zod-config/json-adapter";
